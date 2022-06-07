@@ -124,6 +124,7 @@ class ListVC: UIViewController {
     private func setupTable() {
         tableView.delegate = self
         tableView.dataSource = self
+        
         let nib = UINib(nibName: String(describing: ListCell.self), bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: String(describing: ListCell.self))
     }
@@ -131,14 +132,16 @@ class ListVC: UIViewController {
 
 extension ListVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return books.count + 1
+        return books.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: ListCell.self), for: indexPath)
         guard let listCell = cell as? ListCell else { return cell }
         
-//        configurate
+        let book = books[indexPath.row]
+        listCell.accessoryType = .disclosureIndicator
+        listCell.createCell(Cover: book.imageName, Name: book.name)
         
         return listCell
     }
@@ -152,7 +155,6 @@ extension ListVC: UITableViewDelegate {
         let position = indexPath.row
         
         let playerVC = PlayerVC(nibName: String(describing: PlayerVC.self), bundle: nil)
-        
-//        navigationController?.pushViewController(playerVC, animated: true)
+        present(playerVC, animated: true)
     }
 }
