@@ -6,5 +6,7 @@ target 'AudioBook' do
   use_frameworks!
 
     pod 'ID3TagEditor'
+    pod "Haptica"
+
 
 end

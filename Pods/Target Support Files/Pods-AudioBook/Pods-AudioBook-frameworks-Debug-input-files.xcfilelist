@@ -1,2 +1,3 @@
 ${PODS_ROOT}/Target Support Files/Pods-AudioBook/Pods-AudioBook-frameworks.sh
+${BUILT_PRODUCTS_DIR}/Haptica/Haptica.framework
 ${BUILT_PRODUCTS_DIR}/ID3TagEditor/ID3TagEditor.framework

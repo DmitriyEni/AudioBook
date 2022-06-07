@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Haptica
 
 class ListVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
@@ -150,7 +151,8 @@ extension ListVC: UITableViewDataSource {
 extension ListVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
+        Haptic.impact(.soft).generate()
+
         let position = indexPath.row
         
         let playerVC = PlayerVC(nibName: String(describing: PlayerVC.self), bundle: nil)

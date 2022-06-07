@@ -7,6 +7,7 @@
 
 import UIKit
 import AVFoundation
+import Haptica
 
 class PlayerVC: UIViewController {
 
@@ -21,26 +22,31 @@ class PlayerVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        coverImage.image = UIImage(named: "testCover")
     }
     
     @IBAction func playPauseButtonAction(_ sender: Any) {
-        
+        Haptic.impact(.soft).generate()
+
     }
     
     @IBAction func goForwardAction(_ sender: Any) {
-        
+        Haptic.impact(.soft).generate()
+
     }
     
     @IBAction func goBackwardButtonAction(_ sender: Any) {
-        
+        Haptic.impact(.soft).generate()
+
     }
     
     @IBAction func nextChapterButtonAction(_ sender: Any) {
-        
+        Haptic.impact(.soft).generate()
+
     }
     
     @IBAction func previousChapterButtonAction(_ sender: Any) {
-        
+        Haptic.impact(.soft).generate()
+
     }
 }

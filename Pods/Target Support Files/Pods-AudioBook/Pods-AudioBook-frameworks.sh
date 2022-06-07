@@ -176,9 +176,11 @@ code_sign_if_enabled() {
 }
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "${BUILT_PRODUCTS_DIR}/Haptica/Haptica.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/ID3TagEditor/ID3TagEditor.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "${BUILT_PRODUCTS_DIR}/Haptica/Haptica.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/ID3TagEditor/ID3TagEditor.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then

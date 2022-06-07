@@ -1,16 +1,20 @@
 PODS:
+  - Haptica (3.0.3)
   - ID3TagEditor (4.2.1)
 
 DEPENDENCIES:
+  - Haptica
   - ID3TagEditor
 
 SPEC REPOS:
   trunk:
+    - Haptica
     - ID3TagEditor
 
 SPEC CHECKSUMS:
+  Haptica: 23497230b2d7476621f7860263ae0667279a0a89
   ID3TagEditor: 799573b612470c5df563ff273bba92c433db548c
 
-PODFILE CHECKSUM: 1c74fe540a099c8bb920032f8eeb7cd05bc617ef
+PODFILE CHECKSUM: 52e314849fbbafad132106f2d81c688248e9e7d4
 
 COCOAPODS: 1.11.3
