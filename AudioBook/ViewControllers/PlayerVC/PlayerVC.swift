@@ -9,6 +9,7 @@ import UIKit
 import AVFoundation
 import Haptica
 
+
 class PlayerVC: UIViewController {
     
     @IBOutlet weak var playPauseButton: UIButton!
@@ -20,16 +21,21 @@ class PlayerVC: UIViewController {
     
     @IBOutlet weak var coverImage: UIImageView!
     
+    public var book = Book(name: "", albomName: "", artistName: "", imageName: "", tackName: "")
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        numberOfChaptersLabel.text = book.name
+        nameLabel.text = book.albomName
+        coverImage.image = UIImage(named: book.imageName)
     }
     
-    func createPlayer(Cover: String, Name: String, Chapters: String) {
-        nameLabel.text = Name
-        coverImage.image = UIImage(named: Cover)
-        numberOfChaptersLabel.text = Chapters
-        
-    }
+//    func createPlayer(Cover: String, Name: String, Chapters: String) {
+//        nameLabel.text = Name
+//        coverImage.image = UIImage(named: Cover)
+//        numberOfChaptersLabel.text = Chapters
+//
+//    }
     
     @IBAction func playPauseButtonAction(_ sender: Any) {
         Haptic.impact(.soft).generate()
