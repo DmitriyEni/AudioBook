@@ -151,7 +151,6 @@ extension ListVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-//        present
         let position = indexPath.row
         
         let playerVC = PlayerVC(nibName: String(describing: PlayerVC.self), bundle: nil)
