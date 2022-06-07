@@ -1,0 +1,16 @@
+PODS:
+  - ID3TagEditor (4.2.1)
+
+DEPENDENCIES:
+  - ID3TagEditor
+
+SPEC REPOS:
+  trunk:
+    - ID3TagEditor
+
+SPEC CHECKSUMS:
+  ID3TagEditor: 799573b612470c5df563ff273bba92c433db548c
+
+PODFILE CHECKSUM: 1c74fe540a099c8bb920032f8eeb7cd05bc617ef
+
+COCOAPODS: 1.11.3

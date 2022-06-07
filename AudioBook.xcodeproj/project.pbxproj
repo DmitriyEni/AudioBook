@@ -19,6 +19,7 @@
 		009193E62823F6D3001F11DC /* ListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 009193E42823F6D3001F11DC /* ListCell.xib */; };
 		00A6882A2844E57400F9A053 /* AddCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A688282844E57400F9A053 /* AddCell.swift */; };
 		00A6882B2844E57400F9A053 /* AddCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00A688292844E57400F9A053 /* AddCell.xib */; };
+		099394DF3779693C3D3B0CF0 /* Pods_AudioBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD94273102E8C776EF90A64F /* Pods_AudioBook.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,9 @@
 		009193E42823F6D3001F11DC /* ListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListCell.xib; sourceTree = "<group>"; };
 		00A688282844E57400F9A053 /* AddCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCell.swift; sourceTree = "<group>"; };
 		00A688292844E57400F9A053 /* AddCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddCell.xib; sourceTree = "<group>"; };
+		65657D6DC3DDC68D6C36209C /* Pods-AudioBook.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AudioBook.release.xcconfig"; path = "Target Support Files/Pods-AudioBook/Pods-AudioBook.release.xcconfig"; sourceTree = "<group>"; };
+		AD94273102E8C776EF90A64F /* Pods_AudioBook.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AudioBook.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C25DBF8D0BF14E131D85B34E /* Pods-AudioBook.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AudioBook.debug.xcconfig"; path = "Target Support Files/Pods-AudioBook/Pods-AudioBook.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +47,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				099394DF3779693C3D3B0CF0 /* Pods_AudioBook.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -54,6 +59,8 @@
 			children = (
 				003C822E280DC0A300CAB1C0 /* AudioBook */,
 				003C822D280DC0A300CAB1C0 /* Products */,
+				240AB6E50ACF830AE9A8015C /* Pods */,
+				B0D3672BE8EEBE53673C9848 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -125,6 +132,24 @@
 			path = AddCell;
 			sourceTree = "<group>";
 		};
+		240AB6E50ACF830AE9A8015C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C25DBF8D0BF14E131D85B34E /* Pods-AudioBook.debug.xcconfig */,
+				65657D6DC3DDC68D6C36209C /* Pods-AudioBook.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		B0D3672BE8EEBE53673C9848 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AD94273102E8C776EF90A64F /* Pods_AudioBook.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -132,9 +157,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 003C8240280DC0A600CAB1C0 /* Build configuration list for PBXNativeTarget "AudioBook" */;
 			buildPhases = (
+				ED9E861B626B521BF5547743 /* [CP] Check Pods Manifest.lock */,
 				003C8228280DC0A300CAB1C0 /* Sources */,
 				003C8229280DC0A300CAB1C0 /* Frameworks */,
 				003C822A280DC0A300CAB1C0 /* Resources */,
+				AAD5E4C48EA82D814405770F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -194,6 +221,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		AAD5E4C48EA82D814405770F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AudioBook/Pods-AudioBook-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AudioBook/Pods-AudioBook-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AudioBook/Pods-AudioBook-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		ED9E861B626B521BF5547743 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-AudioBook-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		003C8228280DC0A300CAB1C0 /* Sources */ = {
@@ -348,6 +417,7 @@
 		};
 		003C8241280DC0A600CAB1C0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C25DBF8D0BF14E131D85B34E /* Pods-AudioBook.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -376,6 +446,7 @@
 		};
 		003C8242280DC0A600CAB1C0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 65657D6DC3DDC68D6C36209C /* Pods-AudioBook.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
