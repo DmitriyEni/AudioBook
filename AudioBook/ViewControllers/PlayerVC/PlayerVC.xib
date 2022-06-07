@@ -18,63 +18,32 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="square.and.arrow.up.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="GHe-ep-F4z">
-                    <rect key="frame" x="16" y="63" width="382" height="21"/>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="testImageCover" translatesAutoresizingMaskIntoConstraints="NO" id="slR-pD-1I6">
+                    <rect key="frame" x="87" y="82" width="240" height="128"/>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Глава 1 из 18" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YZb-RO-yy6">
-                    <rect key="frame" x="62" y="104" width="290" height="21"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pxa-Sf-5Wy">
+                    <rect key="frame" x="147" y="352" width="42" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RWg-3K-Pfq">
-                    <rect key="frame" x="368" y="99.5" width="30" height="30"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="30" id="Xid-p5-cZp"/>
-                        <constraint firstAttribute="height" constant="30" id="pNJ-6C-zKa"/>
-                    </constraints>
-                    <state key="normal" title="Button"/>
-                    <buttonConfiguration key="configuration" style="plain" image="chevron.forward" catalog="system">
-                        <color key="baseForegroundColor" systemColor="labelColor"/>
-                    </buttonConfiguration>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T0A-HU-Ty7">
-                    <rect key="frame" x="16" y="99.5" width="30" height="30"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="30" id="6bq-sN-nng"/>
-                        <constraint firstAttribute="height" constant="30" id="sON-dE-rr6"/>
-                    </constraints>
-                    <state key="normal" title="Button"/>
-                    <buttonConfiguration key="configuration" style="plain" image="chevron.backward" catalog="system">
-                        <color key="baseForegroundColor" systemColor="labelColor"/>
-                    </buttonConfiguration>
-                </button>
+                <slider opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="c7D-XG-gNO">
+                    <rect key="frame" x="14" y="264" width="386" height="30"/>
+                </slider>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="YZb-RO-yy6" firstAttribute="top" secondItem="GHe-ep-F4z" secondAttribute="bottom" constant="20" id="2FK-k4-iDl"/>
-                <constraint firstItem="YZb-RO-yy6" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="GO1-Wt-0fo"/>
-                <constraint firstItem="GHe-ep-F4z" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="Gbn-jy-ktd"/>
-                <constraint firstItem="RWg-3K-Pfq" firstAttribute="centerY" secondItem="YZb-RO-yy6" secondAttribute="centerY" id="Kal-go-Ifz"/>
-                <constraint firstItem="GHe-ep-F4z" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="Uu9-KS-PPP"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="GHe-ep-F4z" secondAttribute="trailing" constant="16" id="WSs-oy-Ppa"/>
-                <constraint firstItem="YZb-RO-yy6" firstAttribute="leading" secondItem="T0A-HU-Ty7" secondAttribute="trailing" constant="16" id="cfN-DE-Q7o"/>
-                <constraint firstItem="RWg-3K-Pfq" firstAttribute="leading" secondItem="YZb-RO-yy6" secondAttribute="trailing" constant="16" id="mbv-9j-DpX"/>
-                <constraint firstItem="T0A-HU-Ty7" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="rhg-fG-MdC"/>
-                <constraint firstItem="T0A-HU-Ty7" firstAttribute="centerY" secondItem="YZb-RO-yy6" secondAttribute="centerY" id="shd-n5-NeU"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="RWg-3K-Pfq" secondAttribute="trailing" constant="16" id="vBY-cQ-qOb"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="c7D-XG-gNO" secondAttribute="trailing" constant="16" id="NNS-Oz-3Tm"/>
+                <constraint firstItem="c7D-XG-gNO" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="ejv-HK-pZO"/>
+                <constraint firstItem="c7D-XG-gNO" firstAttribute="top" secondItem="slR-pD-1I6" secondAttribute="bottom" constant="10" id="n6h-Xb-tej"/>
             </constraints>
-            <point key="canvasLocation" x="137.68115942028987" y="93.75"/>
+            <point key="canvasLocation" x="139" y="94"/>
         </view>
     </objects>
     <resources>
-        <image name="chevron.backward" catalog="system" width="96" height="128"/>
-        <image name="chevron.forward" catalog="system" width="96" height="128"/>
-        <image name="square.and.arrow.up.fill" catalog="system" width="115" height="128"/>
-        <systemColor name="labelColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
+        <image name="testImageCover" width="1500" height="1339"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
