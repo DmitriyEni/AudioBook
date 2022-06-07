@@ -10,7 +10,7 @@ import AVFoundation
 import Haptica
 
 class PlayerVC: UIViewController {
-
+    
     @IBOutlet weak var playPauseButton: UIButton!
     
     @IBOutlet weak var numberOfChaptersLabel: UILabel!
@@ -22,31 +22,37 @@ class PlayerVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        coverImage.image = UIImage(named: "testCover")
+    }
+    
+    func createPlayer(Cover: String, Name: String, Chapters: String) {
+        nameLabel.text = Name
+        coverImage.image = UIImage(named: Cover)
+        numberOfChaptersLabel.text = Chapters
+        
     }
     
     @IBAction func playPauseButtonAction(_ sender: Any) {
         Haptic.impact(.soft).generate()
-
+        
     }
     
     @IBAction func goForwardAction(_ sender: Any) {
         Haptic.impact(.soft).generate()
-
+        
     }
     
     @IBAction func goBackwardButtonAction(_ sender: Any) {
         Haptic.impact(.soft).generate()
-
+        
     }
     
     @IBAction func nextChapterButtonAction(_ sender: Any) {
         Haptic.impact(.soft).generate()
-
+        
     }
     
     @IBAction func previousChapterButtonAction(_ sender: Any) {
         Haptic.impact(.soft).generate()
-
+        
     }
 }

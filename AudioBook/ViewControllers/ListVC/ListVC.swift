@@ -152,10 +152,11 @@ extension ListVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         Haptic.impact(.soft).generate()
-
+        let book = books[indexPath.row]
         let position = indexPath.row
-        
+    
         let playerVC = PlayerVC(nibName: String(describing: PlayerVC.self), bundle: nil)
+        playerVC.createPlayer(Cover: book.imageName, Name: book.albomName, Chapters: book.name)
         present(playerVC, animated: true)
     }
 }

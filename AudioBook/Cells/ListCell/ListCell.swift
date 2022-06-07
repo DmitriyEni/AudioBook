@@ -15,7 +15,6 @@ class ListCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
     func createCell(Cover: String, Name: String) {
         bookName.text = Name
