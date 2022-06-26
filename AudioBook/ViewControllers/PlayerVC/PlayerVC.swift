@@ -49,7 +49,7 @@ class PlayerVC: UIViewController {
         
         let urlString = Bundle.main.path(forResource: song.tackName, ofType: "mp3")
         do {
-            try AVAudioSession.sharedInstance().setMode(.default)
+            try AVAudioSession.sharedInstance().setMode(.spokenAudio)
             try AVAudioSession.sharedInstance().setActive(true, options: .notifyOthersOnDeactivation)
             
             guard let urlString = urlString
@@ -82,28 +82,28 @@ class PlayerVC: UIViewController {
         }
     }
     
-    @IBAction func playPauseButtonAction(_ sender: Any) {
-        Haptic.impact(.soft).generate()
-        
-    }
-    
-    @IBAction func goForwardAction(_ sender: Any) {
-        Haptic.impact(.soft).generate()
-        
-    }
-    
-    @IBAction func goBackwardButtonAction(_ sender: Any) {
-        Haptic.impact(.soft).generate()
-        
-    }
-    
-    @IBAction func nextChapterButtonAction(_ sender: Any) {
-        Haptic.impact(.soft).generate()
-        
-    }
-    
-    @IBAction func previousChapterButtonAction(_ sender: Any) {
-        Haptic.impact(.soft).generate()
-        
-    }
+//    @IBAction func playPauseButtonAction(_ sender: Any) {
+//        Haptic.impact(.soft).generate()
+//
+//    }
+//
+//    @IBAction func goForwardAction(_ sender: Any) {
+//        Haptic.impact(.soft).generate()
+//
+//    }
+//
+//    @IBAction func goBackwardButtonAction(_ sender: Any) {
+//        Haptic.impact(.soft).generate()
+//
+//    }
+//
+//    @IBAction func nextChapterButtonAction(_ sender: Any) {
+//        Haptic.impact(.soft).generate()
+//
+//    }
+//
+//    @IBAction func previousChapterButtonAction(_ sender: Any) {
+//        Haptic.impact(.soft).generate()
+//
+//    }
 }
