@@ -18,7 +18,6 @@ class PlayerVC: UIViewController {
     @IBOutlet weak var holder: UIView!
     
     var player: AVAudioPlayer?
-    
     //    User Interface elements
     
     private let albumImageView : UIImageView = {
@@ -82,10 +81,12 @@ class PlayerVC: UIViewController {
         // set up user interface elements
         
         // album cover
-        albumImageView.frame = CGRect(x: holder.frame.size.width * 0.1,
-                                      y: 50,
-                                      width: holder.frame.size.width * 0.8,
-                                      height: holder.frame.size.width * 0.8)
+        albumImageView.frame = CGRect(x: 20,
+                                      y: 40,
+                                      width: holder.frame.size.width - 40,
+                                      height: holder.frame.size.width - 40)
+        albumImageView.layer.cornerRadius = 8.0
+        albumImageView.clipsToBounds = true
         albumImageView.image = UIImage(named: song.imageName)
         
         holder.addSubview(albumImageView)
@@ -156,14 +157,21 @@ class PlayerVC: UIViewController {
         holder.addSubview(dismisButton)
         
         // slider
+        
         let slider = UISlider(frame: CGRect(x: 20,
-                                            y: holder.frame.size.height-60,
+                                            y: albumImageView.frame.size.height+60,
                                             width: holder.frame.size.width-40,
                                             height: 50))
         slider.value = 0.5
         slider.addTarget(self, action: #selector(didSlideSlider(_:)), for: .valueChanged)
         holder.addSubview(slider)
     }
+    
+    @objc func didSlideSlider(_ slider: UISlider) {
+        let value = slider.value
+        player?.volume = value
+    }
+    
     @objc func didTapBackButton() {
         if position > 0 {
             position = position - 1
@@ -200,11 +208,11 @@ class PlayerVC: UIViewController {
             playPauseButton.setBackgroundImage(UIImage(systemName: "play.fill"), for: .normal)
             
             // shrink image
-            UIView.animate(withDuration: 0.3, animations: {
-                self.albumImageView.frame = CGRect(x: self.holder.frame.size.width * 0.15,
-                                                   y: self.holder.frame.size.width * 0.075 + 50,
-                                                   width: self.holder.frame.size.width * 0.7,
-                                                   height: self.holder.frame.size.width * 0.7)
+            UIView.animate(withDuration: 0.4, animations: {
+                self.albumImageView.frame = CGRect(x: 50,
+                                                   y: 70,
+                                                   width: self.holder.frame.size.width - 100,
+                                                   height: self.holder.frame.size.width - 100)
             })
         }
         else {
@@ -216,10 +224,10 @@ class PlayerVC: UIViewController {
             
             // increase image size
             UIView.animate(withDuration: 0.3, animations: {
-                self.albumImageView.frame = CGRect(x: self.holder.frame.size.width * 0.1,
-                                                   y: 55,
-                                                   width: self.holder.frame.size.width * 0.8,
-                                                   height: self.holder.frame.size.width * 0.8)
+                self.albumImageView.frame = CGRect(x: 20,
+                                                   y: 40,
+                                                   width: self.holder.frame.size.width - 40,
+                                                   height: self.holder.frame.size.width - 40)
             })
         }
     }
@@ -229,11 +237,7 @@ class PlayerVC: UIViewController {
         print("tapDismiss")
         self.dismiss(animated: true, completion: nil)
     }
-    
-    @objc func didSlideSlider(_ slider: UISlider) {
-        let value = slider.value
-        player?.volume = value
-    }
+ 
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
