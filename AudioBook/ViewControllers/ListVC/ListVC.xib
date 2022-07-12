@@ -29,6 +29,14 @@
                     <rect key="frame" x="0.0" y="77" width="414" height="785"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </tableView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XyT-JD-0Ib">
+                    <rect key="frame" x="350.5" y="43" width="43.5" height="31"/>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" image="plus" catalog="system"/>
+                    <connections>
+                        <action selector="addBookAction:" destination="-1" eventType="touchUpInside" id="RVP-QK-ulY"/>
+                    </connections>
+                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -38,13 +46,16 @@
                 <constraint firstItem="ITw-Dg-1LC" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="9hg-io-epD"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="3qQ-vj-xau" secondAttribute="bottom" id="Nr0-aD-UdT"/>
                 <constraint firstItem="3qQ-vj-xau" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="akj-wQ-kqI"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="XyT-JD-0Ib" secondAttribute="trailing" constant="20" id="cVN-25-CLC"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="3qQ-vj-xau" secondAttribute="trailing" id="gzR-3c-z1c"/>
+                <constraint firstItem="XyT-JD-0Ib" firstAttribute="centerY" secondItem="ITw-Dg-1LC" secondAttribute="centerY" id="l7j-rv-kbW"/>
                 <constraint firstItem="ITw-Dg-1LC" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="vMN-Bf-cWp"/>
             </constraints>
             <point key="canvasLocation" x="137.68115942028987" y="93.75"/>
         </view>
     </objects>
     <resources>
+        <image name="plus" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

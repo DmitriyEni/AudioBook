@@ -129,6 +129,9 @@ class ListVC: UIViewController {
         let nib = UINib(nibName: String(describing: ListCell.self), bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: String(describing: ListCell.self))
     }
+    @IBAction func addBookAction(_ sender: Any) {
+        
+    }
 }
 
 extension ListVC: UITableViewDataSource {
