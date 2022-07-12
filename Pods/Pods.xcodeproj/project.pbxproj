@@ -208,7 +208,7 @@
 		2F00024275E511780944B418A63F4699 /* ID3GenreFrameCreator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ID3GenreFrameCreator.swift; path = Source/Create/ID3GenreFrameCreator.swift; sourceTree = "<group>"; };
 		3148F71CED8BC9E6FD081D3BF0076AEE /* ID3FrameWithIntegerContent.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ID3FrameWithIntegerContent.swift; path = Source/Frame/ID3FrameWithIntegerContent.swift; sourceTree = "<group>"; };
 		33C5DD5746F936595608F63488E5C862 /* ID3TagHeaderCreator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ID3TagHeaderCreator.swift; path = Source/Create/ID3TagHeaderCreator.swift; sourceTree = "<group>"; };
-		35722857CB203F06A3B640F120B4BF60 /* Haptica */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Haptica; path = Haptica.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		35722857CB203F06A3B640F120B4BF60 /* Haptica.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Haptica.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		360C69908DC241F6916044503DAC6FF8 /* ID3TagEditor.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ID3TagEditor.h; path = Source/ID3TagEditor.h; sourceTree = "<group>"; };
 		37F93B71B988485671E67F9389786543 /* ID3FrameHeaderCreator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ID3FrameHeaderCreator.swift; path = Source/Create/ID3FrameHeaderCreator.swift; sourceTree = "<group>"; };
 		39866BABA546184DEEE6DB71A8CA75ED /* UInt32ToByteArrayAdapter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UInt32ToByteArrayAdapter.swift; path = Source/Common/UInt32ToByteArrayAdapter.swift; sourceTree = "<group>"; };
@@ -266,7 +266,7 @@
 		9775D225974B7C6E0178BF8EA0534098 /* ID3TagEditor-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ID3TagEditor-umbrella.h"; sourceTree = "<group>"; };
 		97C2E2CBD3E61D254F2570990EE69C9C /* ID3UTF16StringToByteAdapter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ID3UTF16StringToByteAdapter.swift; path = Source/Create/ID3UTF16StringToByteAdapter.swift; sourceTree = "<group>"; };
 		99CF4CDEB51DF95C44BA08AD0410F109 /* TagPresence.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TagPresence.swift; path = Source/Tag/TagPresence.swift; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9F8713542AD9F9B5B5AE1BF26C138646 /* Pods-AudioBook-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-AudioBook-umbrella.h"; sourceTree = "<group>"; };
 		9FCEAB23ECB0F7096A37EFE48156CBE6 /* ID3DiscPositionFrameContentParsingOperationFactory.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ID3DiscPositionFrameContentParsingOperationFactory.swift; path = Source/Parse/ID3DiscPositionFrameContentParsingOperationFactory.swift; sourceTree = "<group>"; };
 		A023A0CD7CF480369BEABADA7811D8C2 /* ID3CoupleOfNumbersAdapter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ID3CoupleOfNumbersAdapter.swift; path = Source/Parse/ID3CoupleOfNumbersAdapter.swift; sourceTree = "<group>"; };
@@ -505,7 +505,6 @@
 				DB65D9D1E170BD3CC278612BB8F127FA /* UInt32ToByteArrayAdapterUsingUnsafePointer.swift */,
 				51A1D17164DC5100C621921F72DC3100 /* Support Files */,
 			);
-			name = ID3TagEditor;
 			path = ID3TagEditor;
 			sourceTree = "<group>";
 		};
@@ -536,7 +535,6 @@
 				8FC8E5E9DAF8F1D51A461E44797C01D1 /* Pattern.swift */,
 				A283A4FA61A43936C132DEBE813AAC9C /* Support Files */,
 			);
-			name = Haptica;
 			path = Haptica;
 			sourceTree = "<group>";
 		};
@@ -575,7 +573,7 @@
 		C2C7612512DF3B683EC5502638BEECDB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				35722857CB203F06A3B640F120B4BF60 /* Haptica */,
+				35722857CB203F06A3B640F120B4BF60 /* Haptica.framework */,
 				AF74D3535484E7D3CF2B92381EE6F7B1 /* ID3TagEditor */,
 				7A35F2D6BAD2EF0938D32B16320E3862 /* Pods-AudioBook */,
 			);
@@ -675,7 +673,7 @@
 			);
 			name = Haptica;
 			productName = Haptica;
-			productReference = 35722857CB203F06A3B640F120B4BF60 /* Haptica */;
+			productReference = 35722857CB203F06A3B640F120B4BF60 /* Haptica.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		EC62014506C53A9BFE30C82CF896C217 /* ID3TagEditor */ = {
@@ -703,7 +701,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1240;
-				LastUpgradeCheck = 1240;
+				LastUpgradeCheck = 1320;
 			};
 			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 13.0";
@@ -1076,7 +1074,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/Haptica/Haptica-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/Haptica/Haptica-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1210,7 +1208,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/Haptica/Haptica-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/Haptica/Haptica-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
