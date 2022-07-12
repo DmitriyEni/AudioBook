@@ -45,8 +45,15 @@ class PlayerVC: UIViewController {
         if holder.subviews.count == 0 {
             configure()
         }
+        let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
+        swipeDown.direction = .down
+        self.view.addGestureRecognizer(swipeDown)
     }
-    
+    @objc func handleGesture(gesture: UISwipeGestureRecognizer) -> Void {
+        if gesture.direction == .down {
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
     func configure() {
         // set up player
         let song = book[position]
@@ -96,13 +103,13 @@ class PlayerVC: UIViewController {
                                      y: holder.frame.size.height / 2 - 10,
                                      width: holder.frame.size.width-20,
                                      height: 70)
-   
+        
         
         songNameLabel.text = song.tackName
-      
+        
         
         holder.addSubview(songNameLabel)
-      
+        
         
         // Player controls
         let nextButton = UIButton()
@@ -237,7 +244,7 @@ class PlayerVC: UIViewController {
         print("tapDismiss")
         self.dismiss(animated: true, completion: nil)
     }
- 
+    
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
