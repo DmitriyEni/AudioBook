@@ -26,6 +26,14 @@ class PlayerVC: UIViewController {
         return imageView
     }()
     
+    private let slider : UISlider = {
+        let slider = UISlider()
+        slider.minimumTrackTintColor = .label
+        slider.maximumTrackTintColor = .systemGray
+        slider.setThumbImage(UIImage(named: "thumbImage")?.withTintColor(.label), for: .normal)
+        return slider
+    }()
+    
     private let songNameLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
@@ -33,8 +41,27 @@ class PlayerVC: UIViewController {
         return label
     }()
     
+    private let currentTime: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .left
+        label.numberOfLines = 0 // line wrap
+        label.textColor = .lightGray
+        label.font = label.font.withSize(13)
+        return label
+    }()
+    
+    private let durationTime: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .right
+        label.numberOfLines = 0 // line wrap
+        label.textColor = .lightGray
+        label.font = label.font.withSize(13)
+        return label
+    }()
+    
     let playPauseButton = UIButton()
     
+    var timer:Timer = Timer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,32 +82,20 @@ class PlayerVC: UIViewController {
         }
     }
     func configure() {
+        slider.value = 0
+        
         // set up player
         let song = book[position]
-        print("\(song)")
         
         let urlString = Bundle.main.path(forResource: song.tackName, ofType: "mp3")
         do {
-            try AVAudioSession.sharedInstance().setMode(.gameChat)
-            try AVAudioSession.sharedInstance().setActive(true, options: .notifyOthersOnDeactivation)
-            
-            guard let urlString = urlString else {
-                print("urlstring is nil")
-                return
-            }
-            print("\(urlString)")
-            
+            guard let urlString = urlString else { return }
             
             player = try AVAudioPlayer(contentsOf: URL(string: urlString)!)
             
-            guard let player = player else {
-                print("player is nil")
-                return
-            }
-            player.volume = 0.5
+            guard let player = player else { return }
             
             player.play()
-            
         }
         catch {
             print("error occurred")
@@ -98,62 +113,102 @@ class PlayerVC: UIViewController {
         
         holder.addSubview(albumImageView)
         
-        // Labels: Song name, album, artist
+        // Labels: Book chapter, current time, duration
         songNameLabel.frame = CGRect(x: 10,
-                                     y: holder.frame.size.height / 2 - 10,
-                                     width: holder.frame.size.width-20,
-                                     height: 70)
-        
-        
+                                     y: albumImageView.frame.maxY + 25,
+                                     width: holder.frame.size.width - 20,
+                                     height: 20)
         songNameLabel.text = song.tackName
-        
-        
         holder.addSubview(songNameLabel)
         
+        // slider
+        slider.frame = CGRect(x: 20,
+                              y: songNameLabel.frame.maxY + 15,
+                              width: holder.frame.size.width - 40,
+                              height: 20)
+        
+        slider.maximumValue = Float(player?.duration ?? 0)
+        slider.addTarget(self, action: #selector(didSlideSlider(_:)), for: .valueChanged)
+        slider.isContinuous = false
+        holder.addSubview(slider)
+        
+        // current time
+        currentTime.frame = CGRect(x: 20,
+                                   y: slider.frame.maxY + 5,
+                                   width: holder.frame.size.width-40,
+                                   height: 20)
+        holder.addSubview(currentTime)
+        currentTime.text = "00:00"
+        
+        // set time
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timerCounter), userInfo: nil, repeats: true)
+        
+        durationTime.frame = CGRect(x: 20,
+                                    y: slider.frame.maxY + 5,
+                                    width: holder.frame.size.width-40,
+                                    height: 20)
+        holder.addSubview(durationTime)
+        
+        guard let player = player else { return }
+        let seconds = Int(player.duration)
+        let time = secondsToHoursMinutesSeconds(seconds: seconds)
+        let timeString = makeTimeString(hours: time.0, minutes: time.1, seconds: time.2)
+        durationTime.text = timeString
         
         // Player controls
+        let gobackward15Button = UIButton()
+        let goforward15Button = UIButton()
         let nextButton = UIButton()
         let backButton = UIButton()
         let dismisButton = UIButton()
         
         // Frame
-        let yPosition = songNameLabel.frame.origin.y + 70 + 20
-        let size: CGFloat = 60
+        let yPosition = slider.frame.maxY + 100
+        let size: CGFloat = 50
         
-        playPauseButton.frame = CGRect(x: (holder.frame.size.width - size) / 2.0,
-                                       y: yPosition,
-                                       width: size,
-                                       height: size)
+        playPauseButton.frame = CGRect(x: (holder.frame.size.width - size - 10) / 2.0,
+                                       y: yPosition - 5,
+                                       width: size + 10,
+                                       height: size + 10)
         
-        nextButton.frame = CGRect(x: holder.frame.size.width - size - 50,
-                                  y: yPosition,
-                                  width: size,
-                                  height: size)
+        nextButton.frame = CGRect(x: holder.frame.size.width - 30 - 20,
+                                  y: albumImageView.frame.maxY + 25,
+                                  width: 30,
+                                  height: 20)
         
-        backButton.frame = CGRect(x: 50,
-                                  y: yPosition,
-                                  width: size,
-                                  height: size)
+        backButton.frame = CGRect(x: 20,
+                                  y: albumImageView.frame.maxY + 25,
+                                  width: 30,
+                                  height: 20)
+        
+        goforward15Button.frame = CGRect(x: holder.frame.size.width - size - 60,
+                                         y: yPosition,
+                                         width: size,
+                                         height: size)
+        
+        gobackward15Button.frame = CGRect(x: 60,
+                                          y: yPosition,
+                                          width: size,
+                                          height: size)
         
         dismisButton.frame = CGRect(x: holder.frame.size.width / 2 - 25,
                                     y: 10,
                                     width: 50,
                                     height: 15)
         
-        // Add actions
-        playPauseButton.addTarget(self, action: #selector(didTapPlayPauseButton), for: .touchUpInside)
-        nextButton.addTarget(self, action: #selector(didTapNextButton), for: .touchUpInside)
-        backButton.addTarget(self, action: #selector(didTapBackButton), for: .touchUpInside)
-        dismisButton.addTarget(self, action: #selector(didTapDismasAction), for: .touchUpInside)
+        
         
         // Styling
-        
         playPauseButton.setBackgroundImage(UIImage(systemName: "pause.fill"), for: .normal)
-        backButton.setBackgroundImage(UIImage(systemName: "gobackward.30"), for: .normal)
-        nextButton.setBackgroundImage(UIImage(systemName: "goforward.30"), for: .normal)
+        backButton.setBackgroundImage(UIImage(systemName: "chevron.backward.2"), for: .normal)
+        nextButton.setBackgroundImage(UIImage(systemName: "chevron.forward.2"), for: .normal)
+        gobackward15Button.setBackgroundImage(UIImage(systemName: "gobackward.15"), for: .normal)
+        goforward15Button.setBackgroundImage(UIImage(systemName: "goforward.15"), for: .normal)
         dismisButton.setBackgroundImage(UIImage(systemName: "chevron.compact.down"), for: .normal)
         
         playPauseButton.tintColor = .label
+        gobackward15Button.tintColor = .label
+        goforward15Button.tintColor = .label
         backButton.tintColor = .label
         nextButton.tintColor = .label
         dismisButton.tintColor = .label
@@ -162,24 +217,97 @@ class PlayerVC: UIViewController {
         holder.addSubview(nextButton)
         holder.addSubview(backButton)
         holder.addSubview(dismisButton)
+        holder.addSubview(gobackward15Button)
+        holder.addSubview(goforward15Button)
         
-        // slider
+        // Add actions
+        playPauseButton.addTarget(self, action: #selector(didTapPlayPauseButton), for: .touchUpInside)
+        nextButton.addTarget(self, action: #selector(didTapNextButton), for: .touchUpInside)
+        backButton.addTarget(self, action: #selector(didTapBackButton), for: .touchUpInside)
+        dismisButton.addTarget(self, action: #selector(didTapDismasAction), for: .touchUpInside)
+        goforward15Button.addTarget(self, action: #selector(goforward15Action), for: .touchUpInside)
+        gobackward15Button.addTarget(self, action: #selector(gobackward15Action), for: .touchUpInside)
         
-        let slider = UISlider(frame: CGRect(x: 20,
-                                            y: albumImageView.frame.size.height+60,
-                                            width: holder.frame.size.width-40,
-                                            height: 50))
-        slider.value = 0.5
-        slider.addTarget(self, action: #selector(didSlideSlider(_:)), for: .valueChanged)
-        holder.addSubview(slider)
+        
+    }
+    
+    @objc func goforward15Action() {
+        guard let player = player else { return }
+        
+        if (player.currentTime + 15.0) >= player.duration {
+            didTapNextButton()
+        } else {
+            player.currentTime += 15
+            timerCounter()
+        }
+    }
+    
+    @objc func gobackward15Action() {
+        guard let player = player else { return }
+        
+        if (player.currentTime - 15.0) < 0 {
+            didTapBackButton()
+        } else {
+            player.currentTime -= 15
+            timerCounter()
+        }
+    }
+    
+    
+    func timeInInteger() -> Int {
+        let countdur = player?.currentTime
+        let time3 = countdur ?? 0
+        let time2 = round(time3)
+        
+        let count = Int(time2)
+        
+        return count
+    }
+    
+    @objc func timerCounter() {
+        let count = timeInInteger()
+        let time = secondsToHoursMinutesSeconds(seconds: count)
+        let timeString = makeTimeString(hours: time.0, minutes: time.1, seconds: time.2)
+        currentTime.text = timeString
+        setTimetoSlider()
+        if player?.isPlaying == false {
+            didTapNextButton()
+        }
+    }
+    func secondsToHoursMinutesSeconds(seconds: Int) -> (Int, Int, Int) {
+        return ((seconds / 3600), ((seconds % 3600) / 60),((seconds % 3600) % 60))
+    }
+    
+    func makeTimeString(hours: Int, minutes: Int, seconds : Int) -> String {
+        var timeString = ""
+        if hours != 0 {
+            timeString += String(format: "%02d", hours)
+            timeString += ":"
+            timeString += String(format: "%02d", minutes)
+            timeString += ":"
+            timeString += String(format: "%02d", seconds)
+        } else {
+            timeString += String(format: "%02d", minutes)
+            timeString += ":"
+            timeString += String(format: "%02d", seconds)
+        }
+        return timeString
     }
     
     @objc func didSlideSlider(_ slider: UISlider) {
-        let value = slider.value
-        player?.volume = value
+        guard let player13 = player else { return }
+        
+        player13.currentTime = TimeInterval(slider.value)
+    }
+    
+    func setTimetoSlider() {
+        let value = timeInInteger()
+        slider.value = Float(value)
     }
     
     @objc func didTapBackButton() {
+        Haptic.impact(.soft).generate()
+        
         if position > 0 {
             position = position - 1
             player?.stop()
@@ -187,12 +315,12 @@ class PlayerVC: UIViewController {
                 subview.removeFromSuperview()
             }
             configure()
-            Haptic.impact(.soft).generate()
-            
         }
     }
     
     @objc func didTapNextButton() {
+        Haptic.impact(.soft).generate()
+        
         if position < (book.count - 1) {
             position = position + 1
             player?.stop()
@@ -200,20 +328,17 @@ class PlayerVC: UIViewController {
                 subview.removeFromSuperview()
             }
             configure()
-            Haptic.impact(.soft).generate()
-            
         }
     }
     
     @objc func didTapPlayPauseButton() {
+        Haptic.impact(.soft).generate()
+        
         if player?.isPlaying == true {
-            Haptic.impact(.soft).generate()
-            
             // pause
             player?.pause()
             // show play button
             playPauseButton.setBackgroundImage(UIImage(systemName: "play.fill"), for: .normal)
-            
             // shrink image
             UIView.animate(withDuration: 0.4, animations: {
                 self.albumImageView.frame = CGRect(x: 50,
@@ -221,14 +346,10 @@ class PlayerVC: UIViewController {
                                                    width: self.holder.frame.size.width - 100,
                                                    height: self.holder.frame.size.width - 100)
             })
-        }
-        else {
-            Haptic.impact(.soft).generate()
-            
+        } else {
             // play
             player?.play()
             playPauseButton.setBackgroundImage(UIImage(systemName: "pause.fill"), for: .normal)
-            
             // increase image size
             UIView.animate(withDuration: 0.3, animations: {
                 self.albumImageView.frame = CGRect(x: 20,
@@ -241,10 +362,9 @@ class PlayerVC: UIViewController {
     
     @objc func didTapDismasAction() {
         Haptic.impact(.soft).generate()
-        print("tapDismiss")
+        player?.stop()
         self.dismiss(animated: true, completion: nil)
     }
-    
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
