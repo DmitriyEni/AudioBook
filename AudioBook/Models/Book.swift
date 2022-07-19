@@ -7,12 +7,13 @@
 
 import Foundation
 import ID3TagEditor
+import UIKit
 
 struct Book {
-    let name: String
-    let albomName: String
-    let artistName: String
-    let imageName: String
-    let tackName: String
+//    var name: String! = "1332"
+//    var albomName: String = "6576"
+//    var artistName: String = ""
+//    var imageCover: UIImage = UIImage(named: "testCover")!
+    var tackName: String = ""
 }
 

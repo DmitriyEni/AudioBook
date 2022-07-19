@@ -7,12 +7,14 @@
 
 import UIKit
 import Haptica
+import ID3TagEditor
 
 class ListVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var books = [Book]()
-    
+    let id3TagEditor = ID3TagEditor()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         configureBook()
@@ -20,106 +22,47 @@ class ListVC: UIViewController {
     }
     
     private func configureBook() {
-        books.append(Book(name: "Глава 1",
-                          albomName: "КлаТбище домашних жЫвотных",
-                          artistName: "Всеволод Кузнецов",
-                          imageName: "testCover",
-                          tackName: "01_01"))
-        books.append(Book(name: "Глава 2",
-                          albomName: "КлаТбище домашних жЫвотных",
-                          artistName: "Всеволод Кузнецов",
-                          imageName: "testCover",
-                          tackName: "01_02"))
-        books.append(Book(name: "Глава 3",
-                          albomName: "КлаТбище домашних жЫвотных",
-                          artistName: "Всеволод Кузнецов",
-                          imageName: "testCover",
-                          tackName: "01_03"))
-        books.append(Book(name: "Глава 4",
-                          albomName: "КлаТбище домашних жЫвотных",
-                          artistName: "Всеволод Кузнецов",
-                          imageName: "testCover",
-                          tackName: "01_04"))
-        books.append(Book(name: "Глава 5",
-                          albomName: "КлаТбище домашних жЫвотных",
-                          artistName: "Всеволод Кузнецов",
-                          imageName: "testCover",
-                          tackName: "01_05"))
-        books.append(Book(name: "Глава 6",
-                          albomName: "КлаТбище домашних жЫвотных",
-                          artistName: "Всеволод Кузнецов",
-                          imageName: "testCover",
-                          tackName: "01_06"))
-        books.append(Book(name: "Глава 7",
-                          albomName: "КлаТбище домашних жЫвотных",
-                          artistName: "Всеволод Кузнецов",
-                          imageName: "testCover",
-                          tackName: "01_07"))
-        books.append(Book(name: "Глава 8",
-                          albomName: "КлаТбище домашних жЫвотных",
-                          artistName: "Всеволод Кузнецов",
-                          imageName: "testCover",
-                          tackName: "01_08"))
-        books.append(Book(name: "Глава 9",
-                          albomName: "КлаТбище домашних жЫвотных",
-                          artistName: "Всеволод Кузнецов",
-                          imageName: "testCover",
-                          tackName: "01_09"))
-        books.append(Book(name: "Глава 10",
-                          albomName: "КлаТбище домашних жЫвотных",
-                          artistName: "Всеволод Кузнецов",
-                          imageName: "testCover",
-                          tackName: "01_10"))
-        books.append(Book(name: "Глава 11",
-                          albomName: "КлаТбище домашних жЫвотных",
-                          artistName: "Всеволод Кузнецов",
-                          imageName: "testCover",
-                          tackName: "01_11"))
-        books.append(Book(name: "Глава 12",
-                          albomName: "КлаТбище домашних жЫвотных",
-                          artistName: "Всеволод Кузнецов",
-                          imageName: "testCover",
-                          tackName: "01_12"))
-        books.append(Book(name: "Глава 13",
-                          albomName: "КлаТбище домашних жЫвотных",
-                          artistName: "Всеволод Кузнецов",
-                          imageName: "testCover",
-                          tackName: "01_13"))
-        books.append(Book(name: "Глава 14",
-                          albomName: "КлаТбище домашних жЫвотных",
-                          artistName: "Всеволод Кузнецов",
-                          imageName: "testCover",
-                          tackName: "01_14"))
-        books.append(Book(name: "Глава 15",
-                          albomName: "КлаТбище домашних жЫвотных",
-                          artistName: "Всеволод Кузнецов",
-                          imageName: "testCover",
-                          tackName: "01_15"))
-        books.append(Book(name: "Глава 16",
-                          albomName: "КлаТбище домашних жЫвотных",
-                          artistName: "Всеволод Кузнецов",
-                          imageName: "testCover",
-                          tackName: "01_16"))
-        books.append(Book(name: "Глава 17",
-                          albomName: "КлаТбище домашних жЫвотных",
-                          artistName: "Всеволод Кузнецов",
-                          imageName: "testCover",
-                          tackName: "01_17"))
-        books.append(Book(name: "Глава 18",
-                          albomName: "КлаТбище домашних жЫвотных",
-                          artistName: "Всеволод Кузнецов",
-                          imageName: "testCover",
-                          tackName: "01_18"))
-        books.append(Book(name: "Глава 19",
-                          albomName: "КлаТбище домашних жЫвотных",
-                          artistName: "Всеволод Кузнецов",
-                          imageName: "testCover",
-                          tackName: "01_19"))
-        books.append(Book(name: "Глава 20",
-                          albomName: "КлаТбище домашних жЫвотных",
-                          artistName: "Всеволод Кузнецов",
-                          imageName: "testCover",
-                          tackName: "01_20"))
+        books.append(Book(tackName: "01_01"))
+        books.append(Book(tackName: "01_02"))
+        books.append(Book(tackName: "01_03"))
+        books.append(Book(tackName: "01_04"))
+        books.append(Book(tackName: "1_01"))
+        books.append(Book(tackName: "1_02"))
+        books.append(Book(tackName: "1_03"))
+        books.append(Book(tackName: "1_04"))
+        books.append(Book(tackName: "1_05"))
+        books.append(Book(tackName: "1_06"))
+        books.append(Book(tackName: "1_07"))
+        books.append(Book(tackName: "2_01"))
+        books.append(Book(tackName: "2_02"))
+        books.append(Book(tackName: "2_03"))
+        books.append(Book(tackName: "2_04"))
+        books.append(Book(tackName: "2_05"))
+        books.append(Book(tackName: "2_06"))
+        books.append(Book(tackName: "2_07"))
+        
+//
+//        for i in 0..<books.count {
+//            var book = books[i]
+//
+//            let urlString = Bundle.main.path(forResource: book.tackName, ofType: "mp3")
+//            guard let urlString = urlString else { return }
+//            if let id3Tag = try? id3TagEditor.read(from: urlString ) {
+//                let tagContentReader = ID3TagContentReader(id3Tag: id3Tag)
+//                print("album: \(tagContentReader.album() ?? "")")
+//                print("title: \(tagContentReader.title() ?? "")")
+//                print("albumArtist: \(tagContentReader.albumArtist() ?? "")")
+//                book.albomName = tagContentReader.album() ?? ""
+//                book.name = tagContentReader.title() ?? ""
+//                book.artistName = tagContentReader.albumArtist() ?? ""
+//                let imagedata = tagContentReader.attachedPictures()
+//                if imagedata.count == 0 {
+//                    book.imageCover = UIImage(named: "testCover")!
+//                } else {
+//                book.imageCover = UIImage(data: imagedata[0].picture)!
+//                }
+//            }
+//        }
     }
     
     private func setupTable() {
@@ -145,8 +88,11 @@ extension ListVC: UITableViewDataSource {
         
         let book = books[indexPath.row]
         listCell.accessoryType = .disclosureIndicator
-        listCell.createCell(Cover: book.imageName, Name: book.name)
-        
+//        listCell.book = books
+//        listCell.position = indexPath.row
+        listCell.setupCell(position: indexPath.row, book: book)
+//        listCell.createCell(imageCover: book.imageCover, Name: book.albomName)
+       
         return listCell
     }
 }

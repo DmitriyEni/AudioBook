@@ -8,7 +8,7 @@
 import UIKit
 import AVFoundation
 import Haptica
-
+import ID3TagEditor
 
 class PlayerVC: UIViewController {
     
@@ -16,7 +16,7 @@ class PlayerVC: UIViewController {
     public var book: [Book] = []
     
     @IBOutlet weak var holder: UIView!
-    
+    let id3TagEditor = ID3TagEditor()
     var player: AVAudioPlayer?
     //    User Interface elements
     
@@ -85,9 +85,9 @@ class PlayerVC: UIViewController {
         slider.value = 0
         
         // set up player
-        let song = book[position]
+        let book = book[position]
         
-        let urlString = Bundle.main.path(forResource: song.tackName, ofType: "mp3")
+        let urlString = Bundle.main.path(forResource: book.tackName, ofType: "mp3")
         do {
             guard let urlString = urlString else { return }
             
@@ -96,10 +96,31 @@ class PlayerVC: UIViewController {
             guard let player = player else { return }
             
             player.play()
+            
         }
         catch {
             print("error occurred")
         }
+        
+        guard let urlString = urlString else { return }
+        
+        guard let id3Tag = try? id3TagEditor.read(from: urlString ) else { return }
+        let tagContentReader = ID3TagContentReader(id3Tag: id3Tag)
+        print("album: \(tagContentReader.album() ?? "")")
+        print("title: \(tagContentReader.title() ?? "")")
+        print("albumArtist: \(tagContentReader.albumArtist() ?? "")")
+        //                book.name = tagContentReader.title() ?? ""
+        //                book.artistName = tagContentReader.albumArtist() ?? ""
+        var imageCoverr = UIImage(named: "testCover")
+        
+        let imagedata = tagContentReader.attachedPictures()
+        if imagedata.count == 0 {
+            imageCoverr = UIImage(named: "testCover")!
+        } else {
+            imageCoverr = UIImage(data: imagedata[0].picture)!
+        }
+        
+        
         // set up user interface elements
         
         // album cover
@@ -109,7 +130,8 @@ class PlayerVC: UIViewController {
                                       height: holder.frame.size.width - 40)
         albumImageView.layer.cornerRadius = 8.0
         albumImageView.clipsToBounds = true
-        albumImageView.image = UIImage(named: song.imageName)
+        albumImageView.image = imageCoverr
+        
         
         holder.addSubview(albumImageView)
         
@@ -118,7 +140,7 @@ class PlayerVC: UIViewController {
                                      y: albumImageView.frame.maxY + 25,
                                      width: holder.frame.size.width - 20,
                                      height: 20)
-        songNameLabel.text = song.tackName
+        songNameLabel.text = tagContentReader.title() ?? ""
         holder.addSubview(songNameLabel)
         
         // slider
@@ -270,7 +292,7 @@ class PlayerVC: UIViewController {
         let timeString = makeTimeString(hours: time.0, minutes: time.1, seconds: time.2)
         currentTime.text = timeString
         setTimetoSlider()
-        if player?.isPlaying == false {
+        if player?.currentTime == 0 {
             didTapNextButton()
         }
     }
