@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import ID3TagEditor
 
 struct Book {
     let name: String
@@ -14,5 +13,5 @@ struct Book {
     let artistName: String
     let imageName: String
     let tackName: String
+    let pathcs: URL
 }
-

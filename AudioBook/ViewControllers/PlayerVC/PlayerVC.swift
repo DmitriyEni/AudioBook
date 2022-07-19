@@ -8,6 +8,8 @@
 import UIKit
 import AVFoundation
 import Haptica
+import ID3TagEditor
+import MobileCoreServices
 
 
 class PlayerVC: UIViewController {
@@ -17,6 +19,7 @@ class PlayerVC: UIViewController {
     
     @IBOutlet weak var holder: UIView!
     
+    let id3TagEditor = ID3TagEditor()
     var player: AVAudioPlayer?
     //    User Interface elements
     
@@ -72,10 +75,12 @@ class PlayerVC: UIViewController {
         if holder.subviews.count == 0 {
             configure()
         }
+        
         let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
         swipeDown.direction = .down
         self.view.addGestureRecognizer(swipeDown)
     }
+    
     @objc func handleGesture(gesture: UISwipeGestureRecognizer) -> Void {
         if gesture.direction == .down {
             self.dismiss(animated: true, completion: nil)
@@ -90,16 +95,98 @@ class PlayerVC: UIViewController {
         let urlString = Bundle.main.path(forResource: song.tackName, ofType: "mp3")
         do {
             guard let urlString = urlString else { return }
-            
-            player = try AVAudioPlayer(contentsOf: URL(string: urlString)!)
+//            player = try AVAudioPlayer(contentsOf: URL(string: urlString)!)
+
+            player = try AVAudioPlayer(contentsOf: song.pathcs)
             
             guard let player = player else { return }
+            let stringurl = song.pathcs.absoluteURL.absoluteString
+            if let id3Tag = try? id3TagEditor.read(from: stringurl ) {
+                let tagContentReader = ID3TagContentReader(id3Tag: id3Tag)
+                
+                
+                
+                let imagedata = tagContentReader.attachedPictures()[0].picture
+
+                // ...use the tag...
+                // For example to read the title, album and artist content you can do something similar
+                print("album: \(tagContentReader.album() ?? "")")
+                print("title: \(tagContentReader.title() ?? "")")
+                print("albumArtist: \(tagContentReader.albumArtist() ?? "")")
+                print("composer: \(tagContentReader.composer() ?? "")")
+                print("conductor: \(tagContentReader.conductor() ?? "")")
+                print("contentGrouping: \(tagContentReader.contentGrouping() ?? "")")
+                print("encodedBy: \(tagContentReader.encodedBy() ?? "")")
+                print("encoderSettings: \(tagContentReader.encoderSettings() ?? "")")
+                print("lyricist: \(tagContentReader.lyricist() ?? "")")
+                print("subtitle: \(tagContentReader.subtitle() ?? "")")
+                print("originalFilename: \(tagContentReader.originalFilename() ?? "")")
+                print("copyright: \(tagContentReader.copyright() ?? "")")
+                print("copyright: \(tagContentReader.copyright() ?? "")")
+                print("copyright: \(tagContentReader.copyright() ?? "")")
+
+                
+                
+print("ПОЛУЧИЛОСЬ ПОЛУЧИТЬ ПУТЬ")
+            } else {
+                print("НЕЕЕЕ ПОЛУЧИЛОСЬ ПОЛУЧИТЬ ПУТЬ")
+
+            }
             
+//            let imagedata = tagContentReader.attachedPictures()[0].picture
+//
+//            // ...use the tag...
+//            // For example to read the title, album and artist content you can do something similar
+//            print("album: \(tagContentReader.album() ?? "")")
+//            print("title: \(tagContentReader.title() ?? "")")
+//            print("albumArtist: \(tagContentReader.albumArtist() ?? "")")
+//            print("composer: \(tagContentReader.composer() ?? "")")
+//            print("conductor: \(tagContentReader.conductor() ?? "")")
+//            print("contentGrouping: \(tagContentReader.contentGrouping() ?? "")")
+//            print("encodedBy: \(tagContentReader.encodedBy() ?? "")")
+//            print("encoderSettings: \(tagContentReader.encoderSettings() ?? "")")
+//            print("lyricist: \(tagContentReader.lyricist() ?? "")")
+//            print("subtitle: \(tagContentReader.subtitle() ?? "")")
+//            print("originalFilename: \(tagContentReader.originalFilename() ?? "")")
+//            print("copyright: \(tagContentReader.copyright() ?? "")")
+//            print("copyright: \(tagContentReader.copyright() ?? "")")
+//            print("copyright: \(tagContentReader.copyright() ?? "")")
+
             player.play()
         }
         catch {
             print("error occurred")
         }
+        
+        
+//        guard let urlString = urlString else { return }
+        guard let id3Tag = try? id3TagEditor.read(from: String(contentsOf: song.pathcs)) else { return }
+        let tagContentReader = ID3TagContentReader(id3Tag: id3Tag)
+        
+        let imagedata = tagContentReader.attachedPictures()[0].picture
+        
+        // ...use the tag...
+        // For example to read the title, album and artist content you can do something similar
+        print("album: \(tagContentReader.album() ?? "")")
+        print("title: \(tagContentReader.title() ?? "")")
+        print("albumArtist: \(tagContentReader.albumArtist() ?? "")")
+        print("composer: \(tagContentReader.composer() ?? "")")
+        print("conductor: \(tagContentReader.conductor() ?? "")")
+        print("contentGrouping: \(tagContentReader.contentGrouping() ?? "")")
+        print("encodedBy: \(tagContentReader.encodedBy() ?? "")")
+        print("encoderSettings: \(tagContentReader.encoderSettings() ?? "")")
+        print("lyricist: \(tagContentReader.lyricist() ?? "")")
+        print("subtitle: \(tagContentReader.subtitle() ?? "")")
+        print("originalFilename: \(tagContentReader.originalFilename() ?? "")")
+        print("copyright: \(tagContentReader.copyright() ?? "")")
+        print("copyright: \(tagContentReader.copyright() ?? "")")
+        print("copyright: \(tagContentReader.copyright() ?? "")")
+
+
+        
+        //        var picture = id3Tag.frames[.attachedPicture(.frontCover)]?
+        
+        
         // set up user interface elements
         
         // album cover
@@ -109,21 +196,21 @@ class PlayerVC: UIViewController {
                                       height: holder.frame.size.width - 40)
         albumImageView.layer.cornerRadius = 8.0
         albumImageView.clipsToBounds = true
-        albumImageView.image = UIImage(named: song.imageName)
+        albumImageView.image = UIImage(data: imagedata)
         
         holder.addSubview(albumImageView)
         
         // Labels: Book chapter, current time, duration
-        songNameLabel.frame = CGRect(x: 10,
-                                     y: albumImageView.frame.maxY + 25,
-                                     width: holder.frame.size.width - 20,
-                                     height: 20)
-        songNameLabel.text = song.tackName
+        songNameLabel.frame = CGRect(x: 50,
+                                     y: albumImageView.frame.maxY + 10,
+                                     width: holder.frame.size.width - 100,
+                                     height: 45)
+        songNameLabel.text = (id3Tag.frames[.title] as?  ID3FrameWithStringContent)?.content ?? ""
         holder.addSubview(songNameLabel)
         
         // slider
         slider.frame = CGRect(x: 20,
-                              y: songNameLabel.frame.maxY + 15,
+                              y: songNameLabel.frame.maxY + 10,
                               width: holder.frame.size.width - 40,
                               height: 20)
         
