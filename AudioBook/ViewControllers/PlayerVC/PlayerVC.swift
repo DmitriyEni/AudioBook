@@ -136,15 +136,15 @@ class PlayerVC: UIViewController {
         holder.addSubview(albumImageView)
         
         // Labels: Book chapter, current time, duration
-        songNameLabel.frame = CGRect(x: 10,
-                                     y: albumImageView.frame.maxY + 25,
-                                     width: holder.frame.size.width - 20,
-                                     height: 20)
+        songNameLabel.frame = CGRect(x: 50,
+                                     y: albumImageView.frame.maxY + 10,
+                                     width: holder.frame.size.width - 100,
+                                     height: 45)
         songNameLabel.text = tagContentReader.title() ?? ""
         holder.addSubview(songNameLabel)
         
         // slider
-        slider.frame = CGRect(x: 20,
+        slider.frame = CGRect(x: 10,
                               y: songNameLabel.frame.maxY + 15,
                               width: holder.frame.size.width - 40,
                               height: 20)
